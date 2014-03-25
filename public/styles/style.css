@@ -1,0 +1,186 @@
+@charset "utf-8";
+/*****************************************
+* body
+*****************************************/
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+.clearfix:after {
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+}
+.error {
+    color: red;
+}
+.info {
+    color: yellow;
+}
+.failed {
+    background: yellow;
+}
+table.dataTable{
+    border-collapse:collapse;
+    border:1px solid #ccc;
+    margin: 0 auto;
+}
+table.dataTable caption{
+    font-weight:bold;
+    color:#00f;
+}
+table.dataTable thead th{
+    color:#fff;
+    background-color:#052d92;
+    padding:5px;
+    border:#fff 1px solid;
+    text-align:left;
+}
+table.dataTable tbody td{
+    padding:5px;
+    border-style:solid;
+    border-width:1px 1px 0 1px;
+    border-color:#ccc #fff #ccc #fff;
+}
+table.dataTable tbody tr.odd_row{
+    background-color:#e4f2fb;
+}
+table.dataTable tbody tr.even_row{
+    background-color:#f8f8f8;
+}
+table.dataTable tbody tr:hover{
+    background-color:#ffd900;
+}
+table.dataTable tfoot tr{
+    font-weight:bold;
+    color:#0040ff;
+}
+
+table.dataTable tbody tr.hover{
+    background-color:#ffd900;
+}
+table.dataTable tbody tr input{
+    width: 80px;
+}
+
+/*****************************************
+* header
+*****************************************/
+#header {
+    width: 980px;
+    margin: 0 auto;
+}
+#header h1 {
+    margin: 15px 0;
+    padding: 0;
+}
+div#nav{
+    margin: 0;
+    height:56px;
+    background:url(../images/nav_bg.png) repeat-x;
+}
+div#nav ul{
+    padding:0;
+    width:980px;
+    margin:0 auto;
+    list-style:none;
+}
+div#nav ul li{
+    float:left;
+    height:35px;
+    overflow:hidden;
+    padding:0 2px 0 0;
+    font: bold 12px/35px Arial;
+    background:url(../images/nav_right.png) repeat-y right center;
+}
+div#nav ul li a{
+    float:left;
+    height:100%;
+    padding:0 20px;
+    background:url(../images/nav_sub.png) repeat-x;
+    color:#fff;
+    text-decoration:none;
+    border: 0;
+}
+div#nav ul li a.hover{
+    clear:both;
+    background-position:0 -35px;
+}
+div#nav ul li.current a{
+    background-position:0 -35px;
+}
+div#nav ul li.last{
+    background:none;
+}
+/*****************************************
+* content
+*****************************************/
+#content {
+    width:940px;
+    padding: 20px;
+    margin: 0 auto;
+    overflow: auto;
+}
+form#login  {
+    width: 280px;
+    margin: 20px auto;
+}
+
+form#login label {
+    width:70px;
+    margin: 15px 0 0 0;
+    line-height: 20px;
+    display: block;
+    float: left;
+    clear: left;
+    text-align: right;
+}
+form#login input {
+    margin: 15px 0 0 10px;
+    width: 150px;
+    display: block;
+    float: left;
+}
+
+form#login input#submit {
+    margin: 15px 15px;
+    height: 25px;
+    width: 60px;
+    float: right;
+    clear: both;
+}
+
+a:link, a:visited {
+    color:#f80;
+    text-decoration:none;
+    border-bottom:1px dotted #f80;
+}
+a:hover, a:active {
+    text-decoration:none;
+    border-bottom-style:solid;
+}
+#content a.external {
+    background: url(../images/external.png) center right no-repeat;
+    padding-right: 12px;
+}
+
+/*****************************************
+* footer
+*****************************************/
+#footer {
+    font-size: 16px;
+    width: 980px;
+    margin: 20px auto;
+    border-top: 1px solid #999;
+}
+#footer p {
+    text-align: center;
+    padding: 15px 0;
+}
+#footer a.email{
+    background: url(../images/sendmail.png) no-repeat center right;
+    padding-right: 16px;
+}

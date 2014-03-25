@@ -1,0 +1,100 @@
+<public:component>
+<public:attach event="oncontentready" onevent="fixiepng()" />
+<public:attach event="onmove" onevent="fixiepng_sync()" />
+<script>
+/**
+ * PNG alpha channel fix for MSIE
+ * Last modified: 2009/04/28
+ * Website: http://code.kliu.org/misc/fixiepng/
+ *
+ * Copyright (C) 2009 Kai Liu. Some rights reserved.
+ * License: http://creativecommons.org/licenses/by-sa/2.5/
+ *
+ * Unlike many other similar fixes for this problem, this approach preserves
+ * the use and semantics of the image tag and the ability to save the image via
+ * the context menu.
+ **/
+
+function fixiepng( )
+{
+	var img = element;
+
+	// Make sure that we do this only once
+	if (img.getAttribute("fixiepng") || !/\.png$/i.test(img.src))
+		return;
+
+	// The ID associates the fixup with the image for use in fixiepng_sync()
+	var id = Math.random().toString().replace(/^0\./, "fixiepng");
+	img.setAttribute("fixiepng", id);
+
+	// Separate outer/inner spans are needed to handle the border and padding
+	var elOuter = document.createElement("span");
+	var stOuter = elOuter.style;
+	stOuter.display = "inline-block";
+
+	var elInner = elOuter.appendChild(elOuter.cloneNode());
+	var stInner = elInner.style;
+
+	var stImg = img.currentStyle;
+
+	stOuter.position = "absolute";
+	stOuter.fontSize = "0";
+	stOuter.borderWidth = stImg.borderWidth;
+	stOuter.borderStyle = stImg.borderStyle;
+	stOuter.borderColor = stImg.borderColor;
+	stOuter.padding = stImg.padding;
+
+	// Set the image size...
+	stInner.width = stImg.width;
+	stInner.height = stImg.height;
+	var sizingMethod = "scale";
+
+	// ...unless a size was not specified
+	if (stImg.width == "auto" || stImg.height == "auto")
+	{
+		stInner.width = stInner.height = "1px";
+		sizingMethod = "image";
+	}
+
+	// Load fixed image
+	stInner.filter =
+		"progid:DXImageTransform.Microsoft.AlphaImageLoader(" +
+		"src='" + img.src + "', sizingMethod='" + sizingMethod + "')";
+
+	// Insert the fixup node and hide the original image
+	img.parentNode.insertBefore(elOuter, img);
+	img.style.filter = "progid:DXImageTransform.Microsoft.Alpha(opacity=0)";
+
+	// Users should interact with the original image, not the fixup
+	img.style.position = "relative";
+	img.style.zIndex++;
+
+	elOuter.id = id;
+	fixiepng_sync();
+}
+
+function fixiepng_sync( )
+{
+	var img = element;
+
+	// Ensure that the fixup element is position in the original image's exact
+	// location; called once during setup and whenever the original image moves
+
+	var id, span, x = 0, y = 0;
+
+	if ( (id = img.getAttribute("fixiepng")) &&
+	     (span = img.ownerDocument.getElementById(id)) )
+	{
+		for (var el = img; el; el = el.offsetParent)
+		{
+			x += el.offsetTop;
+			y += el.offsetLeft;
+		}
+
+		span.style.top = x;
+		span.style.left = y;
+	}
+}
+
+</script>
+</public:component>
